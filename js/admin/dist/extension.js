@@ -67,8 +67,8 @@ System.register('flarum/auth/xiaoyunpu/main', ['flarum/app', 'flarum/auth/xiaoyu
   return {
     setters: [function (_flarumApp) {
       app = _flarumApp.default;
-    }, function (_flarumAuthGithubComponentsXiaoyunpuSettingsModal) {
-      XiaoyunpuSettingsModal = _flarumAuthGithubComponentsXiaoyunpuSettingsModal.default;
+    }, function (_flarumAuthXiaoyunpuComponentsXiaoyunpuSettingsModal) {
+      XiaoyunpuSettingsModal = _flarumAuthXiaoyunpuComponentsXiaoyunpuSettingsModal.default;
     }],
     execute: function () {
 

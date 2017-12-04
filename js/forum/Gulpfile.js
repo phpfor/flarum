@@ -2,6 +2,6 @@ var gulp = require('flarum-gulp');
 
 gulp({
   modules: {
-    'flarum/auth/github': 'src/**/*.js'
+    'flarum/auth/xiaoyunpu': 'src/**/*.js'
   }
 });

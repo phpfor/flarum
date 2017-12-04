@@ -1,6 +1,6 @@
 'use strict';
 
-System.register('flarum/auth/github/main', ['flarum/extend', 'flarum/app', 'flarum/components/LogInButtons', 'flarum/components/LogInButton'], function (_export, _context) {
+System.register('flarum/auth/xiaoyunpu/main', ['flarum/extend', 'flarum/app', 'flarum/components/LogInButtons', 'flarum/components/LogInButton'], function (_export, _context) {
   "use strict";
 
   var extend, app, LogInButtons, LogInButton;
@@ -16,15 +16,15 @@ System.register('flarum/auth/github/main', ['flarum/extend', 'flarum/app', 'flar
     }],
     execute: function () {
 
-      app.initializers.add('flarum-auth-github', function () {
+      app.initializers.add('flarum-auth-xiaoyunpu', function () {
         extend(LogInButtons.prototype, 'items', function (items) {
-          items.add('github', m(
+          items.add('xiaoyunpu', m(
             LogInButton,
             {
-              className: 'Button LogInButton--github',
-              icon: 'github',
-              path: '/auth/github' },
-            app.translator.trans('flarum-auth-github.forum.log_in.with_github_button')
+              className: 'Button LogInButton--xiaoyunpu',
+              icon: 'xiaoyunpu',
+              path: '/auth/xiaoyunpu' },
+            app.translator.trans('flarum-auth-xiaoyunpu.forum.log_in.with_xiaoyunpu_button')
           ));
         });
       });

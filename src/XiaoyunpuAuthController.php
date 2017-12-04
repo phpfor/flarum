@@ -13,7 +13,7 @@ namespace Flarum\Auth\Xiaoyunpu;
 use Flarum\Forum\AuthenticationResponseFactory;
 use Flarum\Forum\Controller\AbstractOAuth2Controller;
 use Flarum\Settings\SettingsRepositoryInterface;
-use League\OAuth2\Client\Provider\Github;
+use Phpfor\OAuth2\Client\Provider\Xiaoyunpu;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
 class XiaoyunpuAuthController extends AbstractOAuth2Controller
@@ -38,7 +38,12 @@ class XiaoyunpuAuthController extends AbstractOAuth2Controller
      */
     protected function getProvider($redirectUri)
     {
-        return new Github([
+        return new Xiaoyunpu([
+            'clientId'     => 'bbsclient',
+            'clientSecret' => 'bbspass',
+            'redirectUri'  => 'http://bbs.xyp.com:8080/auth/xiaoyunpu'
+        ]);        
+        return new Xiaoyunpu([
             'clientId'     => $this->settings->get('flarum-auth-xiaoyunpu.client_id'),
             'clientSecret' => $this->settings->get('flarum-auth-xiaoyunpu.client_secret'),
             'redirectUri'  => $redirectUri
@@ -50,7 +55,7 @@ class XiaoyunpuAuthController extends AbstractOAuth2Controller
      */
     protected function getAuthorizationUrlOptions()
     {
-        return ['scope' => ['user:email']];
+        return ['scope' => ['']];
     }
 
     /**
@@ -58,8 +63,9 @@ class XiaoyunpuAuthController extends AbstractOAuth2Controller
      */
     protected function getIdentification(ResourceOwnerInterface $resourceOwner)
     {
+        $email = $resourceOwner->getId().'@xiaoyunpu.com';
         return [
-            'email' => $resourceOwner->getEmail() ?: $this->getEmailFromApi()
+            'email' => $email
         ];
     }
 
@@ -69,7 +75,7 @@ class XiaoyunpuAuthController extends AbstractOAuth2Controller
     protected function getSuggestions(ResourceOwnerInterface $resourceOwner)
     {
         return [
-            'username' => $resourceOwner->getNickname(),
+            'username' => $resourceOwner->getId(),
             'avatarUrl' => array_get($resourceOwner->toArray(), 'avatar_url')
         ];
     }
@@ -77,7 +83,6 @@ class XiaoyunpuAuthController extends AbstractOAuth2Controller
     protected function getEmailFromApi()
     {
         $url = $this->provider->apiDomain.'/user/emails';
-
         $emails = $this->provider->getResponse(
             $this->provider->getAuthenticatedRequest('GET', $url, $this->token)
         );
