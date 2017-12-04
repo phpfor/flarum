@@ -1,5 +1,5 @@
 {
-    "name": "flarum/flarum-ext-auth-xiaoyunpu",
+    "name": "phpfor/flarum-ext-auth-xiaoyunpu",
     "description": "Allow users to log in with Xiaoyunpu.",
     "type": "flarum-extension",
     "keywords": ["authentication"],
@@ -23,9 +23,6 @@
         }
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.x-dev"
-        },
         "flarum-extension": {
             "title": "Xiaoyunpu Login",
             "icon": {
